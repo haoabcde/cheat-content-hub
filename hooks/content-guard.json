@@ -1,0 +1,18 @@
+{
+  "_comment": "cheat-on-content content-guard hook. Enforces project initialization, template compliance, and aihot routing for content files.",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ${CLAUDE_PROJECT_DIR}/.cheat-hooks/content-guard.sh",
+            "timeout": 3,
+            "async": false
+          }
+        ]
+      }
+    ]
+  }
+}

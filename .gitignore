@@ -1,0 +1,73 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+
+# AI 工具本地状态（hooks 的项目级配置在用户自己的 content project，不走这里）
+.claude/
+.gemini/
+.codex/
+.playwright-mcp/
+.local-artifacts/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+.python-version
+
+# Secrets / environment
+.env
+.env.*
+
+# SQLite
+*.sqlite
+*.sqlite3
+
+# 用户项目数据（万一在源码目录里跑了 cheat-init，别污染源码 repo）
+.cheat-state.json
+.cheat-cache/
+.cheat-hooks/
+.cheat-secrets.json
+/predictions/
+/videos/
+/articles/
+/xhs/
+/scripts/
+/samples/
+/candidates.md
+/rubric_notes.md
+/rubric-memo.md
+/script_patterns.md
+/benchmark.md
+/audience.md
+/STATUS.md
+/WORKFLOW.md
+/content.db
+
+# Adapter 运行时登录态与调试输出
+.auth/
+.auth-xhs/
+.auth-linkedin/
+.auth-wechat-channels/
+.debug/
+
+# 依赖与构建产物
+node_modules/
+
+# Editor / IDE
+.vscode/
+.idea/
+.gstack/
+.agents/
+*.swp
+*.swo
+*~
+
+# 临时文件
+*.tmp
+*.log

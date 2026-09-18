@@ -1,0 +1,5 @@
+interface:
+  display_name: WeChat Tech Visual Researcher
+  short_description: Finds and screenshots source-backed visuals for AI/tech WeChat articles.
+  icon: camera
+  brand_color: "#2563eb"
