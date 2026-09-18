@@ -310,7 +310,7 @@ if [[ -d "$PROJECT_DIR/articles" && -d "$PROJECT_DIR/predictions" ]]; then
     rel_article="${article_file#$PROJECT_DIR/}"
     article_name="$(basename "$article_file")"
     case "$article_name" in
-      cover-prompt.md|publish-notes.md|captions.md|risk-notes.md|sources.md|report.md|*-prompt.md|meta.md|script.md)
+      cover-prompt.md|publish-notes.md|captions.md|risk-notes.md|sources.md|report.md|quality_report.md|skeleton.md|*-prompt.md|meta.md|script.md|_*.md)
         continue
         ;;
     esac
@@ -318,13 +318,24 @@ if [[ -d "$PROJECT_DIR/articles" && -d "$PROJECT_DIR/predictions" ]]; then
       continue
     fi
     parent_name="$(basename "$(dirname "$article_file")")"
-    if [[ "$(basename "$(dirname "$(dirname "$article_file")")")" == "articles" ]]; then
+    grandparent_name="$(basename "$(dirname "$(dirname "$article_file")")")"
+    # Scope: only article-root files and drafts/ subdir count as drafts;
+    # visual/, adlc_report/, tests/ etc. are auxiliary and never flagged.
+    if [[ "$grandparent_name" == "articles" ]]; then
       article_id="$parent_name"
-    else
+    elif [[ "$parent_name" == "drafts" ]]; then
+      article_id="$grandparent_name"
+    elif [[ "$parent_name" == "articles" ]]; then
       article_id="${article_name%.md}"
+    else
+      continue
     fi
+    # Dir-level match: prediction filenames carry a hash segment (<date>_<hash>_<slug>.md),
+    # so matching by article id misses them; match references to the article dir instead.
+    # Tradeoff: a new draft version written after the prediction is not flagged here —
+    # content drift is caught by the Script Hash check at publish time.
     if ! find "$PROJECT_DIR/predictions" -maxdepth 1 -type f -name "*${article_id}*.md" | grep -q . && \
-       ! grep -R -q "$rel_article" "$PROJECT_DIR/predictions" 2>/dev/null; then
+       ! grep -R -q "articles/${article_id}" "$PROJECT_DIR/predictions" 2>/dev/null; then
       note_orphan "$rel_article"
     fi
   done < <(find "$PROJECT_DIR/articles" -maxdepth 3 -type f -name "*.md" 2>/dev/null | sort)

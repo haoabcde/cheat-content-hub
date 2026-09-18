@@ -8,6 +8,15 @@ All notable changes to cheat-on-content will be documented here.
 
 ## [Unreleased]
 
+## [0.2.0] — 2026-09-19
+
+### Fixed — session-start 孤儿草稿检测误报修复（2026-09-19）
+
+- 文章孤儿匹配从全路径 grep 改为目录级引用匹配（`articles/<id>`），消除预测文件名 hash 段（`<date>_<hash>_<slug>.md`）导致的误报——此前凡 hash 命名的预测，其文章会被误报为孤儿
+- 扫描范围收窄为 `articles/<id>/*.md` 与 `articles/<id>/drafts/*.md`，`visual/`、`adlc_report/`、`tests/` 等辅助目录不再误报
+- skip list 增加 `quality_report.md`、`skeleton.md`、`_*.md` 辅助文件
+- 已知取舍：目录级匹配认不出"预测后新写的版本草稿"，内容漂移由发布时 Script Hash 校验兜底
+
 ### Fixed — 多格式改造补全（schema 1.5 断链修复，2026-09-18）
 
 审计发现多格式扩展在官方原有文件里留了两条系统性断链，本批全部补齐：
