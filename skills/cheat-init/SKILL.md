@@ -69,8 +69,8 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
    工具用 🔴🟠🟡🟢🔵 标 confidence 等级，不藏数字——
    你自己判断这次能不能信。
 
-2. **强烈建议导对标账号**——5-10 条对标视频，工具立刻有 anchor。
-   不然第一批预测基本是占星。后面 Q5 会再问一次。
+2. **强烈建议导对标账号**——5-10 条对标作品，工具立刻有 anchor。
+   不然第一批预测基本是占星。后面 Phase 2.5 会再问一次。
 
 准备好开始吗？
 ```
@@ -138,9 +138,10 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
 > d) B 站 — bilibili-stat adapter
 > e) LinkedIn — 装 linkedin-session adapter（Playwright + 登录 LinkedIn，抓单帖分析）
 > f) 微信视频号 — 装 wechat-channels adapter（Playwright + 扫码登录视频号助手，仅抓自己账号后台数据）
-> g) 其他 / 多平台 — 走 manual paste 模式"
+> g) 公众号 — 无官方数据 API，走手动粘贴（阅读 / 在看 / 点赞 + 截图转录）
+> h) 其他 / 多平台 — 走 manual paste 模式"
 
-如选 a/b/c/d/e/f → 询问 Q2.2；如选 g → 跳到 Q2.3 manual。
+如选 a/b/c/d/e/f → 询问 Q2.2；如选 g/h → 跳到 Q2.3 manual。
 
 **Q2.2: adapter 安装时机**（仅 Q2.1=a/b/c/d/e/f）
 
@@ -176,6 +177,14 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
 >    第一次 publish 之前装上就行（cheat-status 会持续提醒装）。
 >    装的指引在 adapters/perf-data/<platform>/README.md。"
 
+**按 Q1 的格式调整上面问法的口径**（指标映射以 [shared-references/state-management.md](../../shared-references/state-management.md) 的"实绩指标映射（按格式）"为准）：
+
+| default_format | 主指标（替换"播放数"） | 评论要求 | b) adapter 选项 |
+|---|---|---|---|
+| video | 播放数 | top 20+ 评论（带赞数） | 照原文推荐 |
+| article | 阅读 / 在看 / 点赞 | 评论截图或粘贴（公众号无 adapter，Q2.1=g 时只出现 a 选项） | 仅 Q2.1 选了有 adapter 的平台时提供 |
+| xhs | 赞 / 收藏 / 收藏率 | 评论（带赞数） | 对应 xhs-explore |
+
 **Q3 → `data_collection` enum 映射**：
 
 | 用户答 | `data_collection` 写入值 |
@@ -200,6 +209,21 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
 | b | `"markdown"` |
 | c | `"notion"` |
 
+**Q4.5: 热点来源**（仅 Q1 选了公众号 / 小红书——default_format ∈ {article, xhs} 时问）
+
+> "你的内容会涉及 AI / 科技资讯吗？
+> a) 会 — 启用 aihot 热点源：以后写 AI 资讯前，先对我说 'AI 热点' 拿当日数据再动笔。
+>    这是强制的——content-guard 会拦截含 AI 关键词但当天没有 aihot 记录的草稿。
+>    训练数据里的'新闻'经常是过时的，这条规则防的就是这个。
+> b) 不涉及 — 保持手动粘贴热点"
+
+**Q4.5 → `enabled_trend_sources` 映射**：
+
+| 用户答 | `enabled_trend_sources` 写入值 |
+|---|---|
+| a | `["aihot"]` |
+| b（或 Q1=video，未问） | `["manual-paste"]` |
+
 **Q5: 装几个 hook（默认装，不需要你决定）**
 
 > "Q5：我顺便装几个 hook，回 'yes' 或 'enter' 就装：
@@ -212,7 +236,11 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
 >
 > 3. **静默使用日志** — 异步记录使用频率，不阻塞，给将来诊断用
 >
-> 三个一起装。**不装也可以**（回 'no'）但你失去预测锁，校准价值会下降。
+> <Q1 选了公众号 / 小红书时，追加第 4 个：>
+> 4. **内容守护** — 草稿必须带模板头才能落盘（防漏字段）；含 AI 关键词的稿子
+>    必须先走 aihot（防拿训练数据当新闻写）
+>
+> 一起装。**不装也可以**（回 'no'）但你失去预测锁，校准价值会下降。
 >
 > 回 yes / no。"
 
@@ -235,11 +263,11 @@ allowed-tools: Bash(*), Read, Write, Edit, Glob, WebFetch, Skill
 ```
 🎯 对标账号
 
-你能找一个对标账号吗？至少 3 条该账号的视频。
+你能找一个对标账号吗？至少 3 条该账号的作品。
 
-  - 你**完全没发过历史**（Q2=a/b）→ **强烈建议**——rubric 没 anchor 全靠对标。
+  - 你**完全没发过历史**（Q2=a）→ **强烈建议**——rubric 没 anchor 全靠对标。
     不找的话用通用 v0 等权 rubric，前 5 篇精度更差更久
-  - 你**已发历史**（Q2=c）→ **可选**——你也可以只用自己历史 calibrate；
+  - 你**已发历史**（Q2=b）→ **可选**——你也可以只用自己历史 calibrate；
     但建议至少导 1 个对标做 sanity check（看你账号是否真的偏离对标方向）
 
 a) 现在找 → 立刻进入 /cheat-learn-from（5-15 分钟，看你材料准备程度）
@@ -301,8 +329,8 @@ c) 不找 → state 标 `benchmark_status: none`，用通用 v0 起步
      "pool_status": "<查 Q4 映射表，写 \"none\"/\"markdown\"/\"notion\">",
      "data_layer": "markdown",
      "hooks_installed": <查 Q5 映射表，写 bool true/false>,
-     "enabled_trend_sources": ["manual-paste"],
-     "enabled_perf_adapters": <Q2.1=a→[\"douyin-session\"]；b→[\"xhs-explore\"]；c→[\"youtube-data-api\"]；d→[\"bilibili-stat\"]；e→[\"linkedin-session\"]；f→[\"wechat-channels\"]；其他→[]>,
+     "enabled_trend_sources": <查 Q4.5 映射表，写 [\"aihot\"] 或 [\"manual-paste\"]>,
+     "enabled_perf_adapters": <Q2.1=a→[\"douyin-session\"]；b→[\"xhs-explore\"]；c→[\"youtube-data-api\"]；d→[\"bilibili-stat\"]；e→[\"linkedin-session\"]；f→[\"wechat-channels\"]；g/h→[]>,
      "last_trends_run_at": null,
      "last_trends_added_count": 0,
      "in_progress_session": null,
@@ -441,6 +469,16 @@ c) 不找 → state 标 `benchmark_status: none`，用通用 v0 起步
    - 复制 `cheat-on-content/templates/audience.template.md` → `<user-repo>/audience.md`
    - 如 Phase 2.5 选了 a/b（有 benchmark）→ Phase 5 清单里提示"可跑 `/cheat-persona — seed-from-benchmark` 先 seed 一份未验证画像"
 
+4.9. **草稿模板**（仅 default_format ∈ {article, xhs}）
+   ```
+   "正在复制草稿模板到 templates/ — 第一稿从这个模板开始写。
+    content-guard 会检查公众号 / 小红书草稿必须带模板头（格式 / 选题 ID / 状态），
+    缺了会被拦下并提示你用这个模板——提前放好。"
+   ```
+   - default_format=article → 复制 `cheat-on-content/templates/draft.template.md` → `<user-repo>/templates/draft.template.md`
+   - default_format=xhs → 复制 `cheat-on-content/templates/xhs-post.template.md` → `<user-repo>/templates/xhs-post.template.md`
+   - default_format=video → 跳过
+
 5. **`WORKFLOW.md`** + **`STATUS.md`**
    - 复制 templates/ 对应文件
 
@@ -516,12 +554,26 @@ cheat-learn-from 完成后回到 init 的 Phase 5。
 
 下次你可以直接说这些：
 
+<video:>
 📝 写完一篇稿子 → "打分这篇 scripts/<...>.md"
 🎯 准备发布前  → "启动预测 scripts/<...>.md"
-🎬 视频拍完了  → "拍了 scripts/<...>.md" → 建 video folder + buffer +1（仅 video）
+🎬 视频拍完了  → "拍了 scripts/<...>.md" → 建 video folder + buffer +1
+<article:>
+📝 写完一篇稿子 → "打分这篇 articles/<id>/draft.md"
+🎯 准备发布前  → "启动预测 articles/<id>/draft.md"
+<xhs:>
+📝 写完一篇帖子 → "打分这篇 xhs/<id>/post.md"
+🎯 准备发布前  → "启动预测 xhs/<id>/post.md"
 🚀 发布后      → "已发布 https://..."
 📊 T+3 天      → "复盘 <对应 artifact folder 或 prediction 文件>"
 📈 任何时候    → "状态"（看完整看板）
+
+<如果 default_format ∈ {article, xhs}:>
+🎨 稿子定了    → "配图"（cheat-visual 生成封面 / 插图）
+📐 要发布前    → "排版"（neat-freak 按平台版式整理终稿）
+⚠️ content-guard 已启用：草稿必须带模板头——从 templates/ 里的模板开始写就不会被拦
+<如果 Q4.5=a:>
+🔥 写 AI 资讯前 → 先说 "AI 热点"（aihot 拿当日数据；guard 会查当天记录）
 
 <如果 Q4=没有候选选题:>
 🌱 现在跑 /cheat-seed 找选题？
@@ -578,6 +630,7 @@ cheat-learn-from 完成后回到 init 的 Phase 5。
 | `data_collection` | Phase 3 | Q3 → 查映射表换 enum 值 |
 | `pool_status` | Phase 3 | Q4 → 查映射表换 enum 值 |
 | `enabled_perf_adapters` | Phase 3 | Q2.1 派生（如 Q2=a 则 `[]`） |
+| `enabled_trend_sources` | Phase 3 | Q4.5 派生：`["aihot"]` 或 `["manual-paste"]`（Q1=video 未问时后者） |
 | `hooks_installed` | Phase 3-4 | Q5 → bool（不是字符串） |
 | `formats.<format>.last_bump_at` / `formats.<format>.last_published_at` / `formats.<format>.last_published_file` / `formats.<format>.last_retro_at` | Phase 3 | 全部 `null` |
 | `formats.<format>.last_bump_self_audited` | Phase 3 | `false` |
