@@ -11,7 +11,7 @@ All notable changes to cheat-on-content will be documented here.
 ### Removed — 配图 / 排版 skill 改为引导自建（2026-09-20）
 
 - 移除 `skills/cheat-visual` 与 `skills/neat-freak` 的实际实现——配图和排版是表达层（风格即品牌），通用默认值的结局是所有人的号长一个样
-- 新增 [custom-format-skills.md](shared-references/custom-format-skills.md)：教用户给自己建这两个 skill 的方法（该拥有什么 / 怎么注册 / 为什么留白）
+- 新增 [custom-format-skills.md](shared-references/custom-format-skills.md)：引导式搭建流程——发截图（公众号博主封面/正文排版、小红书排版均可）或语言描述，cheat-init 式问答，每步可跳过
 - SKILL.md 路由、cheat-init Phase 5、workflow.template 相应改为指向指南；install.sh / uninstall.sh / verify-package 计数 18 → 16
 - content-guard Rule 3 拦截提示改指 `adapters/trend-sources/aihot.md`（aihot 为外部 skill，需单独安装）
 

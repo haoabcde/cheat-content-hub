@@ -32,7 +32,7 @@ Cheat Content Hub 是一个 Claude Code / Codex skill 套件，让每一次判�
 |---|---|---|---|
 | 选题 | cheat-seed + cheat-trends | cheat-seed + aihot | cheat-seed + aihot |
 | 写稿 | 自己写脚本 | 按模板 + 编辑工作流 | cheat-seed 短版 |
-| 配图/排版 | — | 自建（[指南](shared-references/custom-format-skills.md)） | 自建（同左） |
+| 配图/排版 | — | 自建（[引导流程](shared-references/custom-format-skills.md)） | 自建（同左） |
 | 打分预测 | cheat-score + cheat-predict | 同左（article rubric） | 同左（xhs rubric） |
 | 发布登记 | cheat-shoot → cheat-publish | cheat-publish | cheat-publish |
 | 复盘 | cheat-retro（T+3d） | cheat-retro（T+7d） | cheat-retro（T+3d） |
@@ -91,7 +91,7 @@ bash install.sh          # symlink 18 个子 skill 到 Claude Code 和/或 Codex
 
 - 多格式路由与 schema 1.5（`default_format` + `formats.<format>` 命名空间）
 - 公众号 / 小红书 rubric、模板与编辑工作流
-- aihot（AI 热点）等创作链 skill；配图/排版刻意留白，引导用户自建（[custom-format-skills.md](shared-references/custom-format-skills.md)）
+- aihot（AI 热点）等创作链 skill；配图/排版刻意留白——发截图或描述即可走[引导流程](shared-references/custom-format-skills.md)自建
 - content-guard 内容守护 hook
 - 更完整的迁移系统与回归测试（state 迁移 / hook / 工作流审计）
 

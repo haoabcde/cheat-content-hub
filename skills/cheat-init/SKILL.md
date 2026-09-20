@@ -570,7 +570,7 @@ cheat-learn-from 完成后回到 init 的 Phase 5。
 
 <如果 default_format ∈ {article, xhs}:>
 🎨📐 配图/排版  → 工具刻意不自带（风格是你的品牌，默认值=所有人的号长一个样）。
-   想建自己的配图/排版 skill → 说 "读 shared-references/custom-format-skills.md 帮我建"
+   想建 → 说 "建配图 skill" / "建排版 skill"（引导式问答：截图/描述都行，每步可跳过）
 ⚠️ content-guard 已启用：草稿必须带模板头——从 templates/ 里的模板开始写就不会被拦
 <如果 Q4.5=a:>
 🔥 写 AI 资讯前 → 先说 "AI 热点"（aihot 拿当日数据；guard 会查当天记录）

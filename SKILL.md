@@ -89,7 +89,7 @@ Codex 没有 Claude Code 的 slash-command harness。安装到 Codex 后，按�
 | "抓热点" / "fetch trends" / "今天有什么可做的" | `/cheat-trends`（video）/ **aihot**（article/xhs）| trend-sources adapter 已配置（日常补充候选池） |
 | "研究一下" / "深度调研" | 不适用（video）/ 自行调研（可用任意深度研究方式）（article/xhs）| 已 init |
 | "写稿" / "帮我写" | 不适用（video）/ 自行写稿 + `shared-references/wechat-editorial-workflow.md`（article）/ `/cheat-seed --format=xhs`（xhs） | 有选题/素材 |
-| "找配图" / "visual research" | 不适用（video）/ 自建配图 skill（article/xhs，指南见 shared-references/custom-format-skills.md）| 有草稿 |
+| "找配图" / "visual research" | 不适用（video）/ 自建配图 skill（article/xhs；说 "建配图 skill" 走引导流程）| 有草稿 |
 | "状态" / "status" / "看板" | `/cheat-status` | 任意时刻可调 |
 | "迁移" / "升级 state" / "schema 版本不对" / "migrate" | `/cheat-migrate` | 已 init；用户 git pull 拉了新版后；SessionStart hook 提示 schema mismatch 后 |
 
