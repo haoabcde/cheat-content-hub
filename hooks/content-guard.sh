@@ -219,7 +219,7 @@ What to do:
   • Use aihot output as your data source
   • Then write content based on that data
 
-See: skills/aihot/SKILL.md
+See: adapters/trend-sources/aihot.md (aihot is an external skill - install separately, then say "AI 热点")
 EOF
     exit 1
   fi

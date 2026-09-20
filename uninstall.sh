@@ -33,9 +33,7 @@ SUB_SKILLS=(
   cheat-trends
   cheat-status
   cheat-migrate
-  cheat-visual
   aihot
-  neat-freak
 )
 
 CLAUDE_SKILLS=("${SUB_SKILLS[@]}")

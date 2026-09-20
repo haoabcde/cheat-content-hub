@@ -569,8 +569,8 @@ cheat-learn-from 完成后回到 init 的 Phase 5。
 📈 任何时候    → "状态"（看完整看板）
 
 <如果 default_format ∈ {article, xhs}:>
-🎨 稿子定了    → "配图"（cheat-visual 生成封面 / 插图）
-📐 要发布前    → "排版"（neat-freak 按平台版式整理终稿）
+🎨📐 配图/排版  → 工具刻意不自带（风格是你的品牌，默认值=所有人的号长一个样）。
+   想建自己的配图/排版 skill → 说 "读 shared-references/custom-format-skills.md 帮我建"
 ⚠️ content-guard 已启用：草稿必须带模板头——从 templates/ 里的模板开始写就不会被拦
 <如果 Q4.5=a:>
 🔥 写 AI 资讯前 → 先说 "AI 热点"（aihot 拿当日数据；guard 会查当天记录）

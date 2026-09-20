@@ -89,8 +89,7 @@ Codex 没有 Claude Code 的 slash-command harness。安装到 Codex 后，按�
 | "抓热点" / "fetch trends" / "今天有什么可做的" | `/cheat-trends`（video）/ **aihot**（article/xhs）| trend-sources adapter 已配置（日常补充候选池） |
 | "研究一下" / "深度调研" | 不适用（video）/ 自行调研（可用任意深度研究方式）（article/xhs）| 已 init |
 | "写稿" / "帮我写" | 不适用（video）/ 自行写稿 + `shared-references/wechat-editorial-workflow.md`（article）/ `/cheat-seed --format=xhs`（xhs） | 有选题/素材 |
-| "找配图" / "visual research" | 不适用（video）/ `/cheat-visual`（article/xhs，必须输出裁切/图注/contact sheet）| 有草稿 |
-| "整理文档" / "收尾" | **neat-freak** | 任意时刻可调 |
+| "找配图" / "visual research" | 不适用（video）/ 自建配图 skill（article/xhs，指南见 shared-references/custom-format-skills.md）| 有草稿 |
 | "状态" / "status" / "看板" | `/cheat-status` | 任意时刻可调 |
 | "迁移" / "升级 state" / "schema 版本不对" / "migrate" | `/cheat-migrate` | 已 init；用户 git pull 拉了新版后；SessionStart hook 提示 schema mismatch 后 |
 
@@ -154,7 +153,7 @@ skill 期望用户的项目布局如下。`/cheat-init` 会创建缺失项；**�
 ├── articles/                          # 公众号产物（article 格式）
 │   └── YYYY-MM-DD_<id>_<short>/
 │       ├── draft.md                   # 长文终稿
-│       ├── visual/                    # cheat-visual 产出的配图
+│       ├── visual/                    # 自建配图 skill 产出
 │       └── report.md                  # T+3d 复盘数据
 ├── xhs/                               # 小红书产物（xhs 格式）
 │   └── YYYY-MM-DD_<id>_<short>/
@@ -187,7 +186,6 @@ cheat-on-content/
 │   ├── cheat-publish/SKILL.md         # ✅ 发布元数据登记（buffer -1）
 │   ├── cheat-retro/SKILL.md           # ✅ 数据回收 + 复盘
 │   ├── cheat-persona/SKILL.md         # ✅ 受众画像派生（从复盘评论聚类）
-│   ├── cheat-visual/SKILL.md          # ✅ 视觉证据研究（搜寻 P0-P4 级真实配图）
 │   ├── cheat-bump/SKILL.md            # ✅ rubric 升级（含跨模型审）
 │   ├── cheat-recommend/SKILL.md       # ✅ 候选池排序推荐（按 buffer 颜色 + 1 稳 + 1 实验）
 │   ├── cheat-trends/SKILL.md          # ✅ 热点抓取（日常补充候选池，多 adapter）
@@ -195,7 +193,6 @@ cheat-on-content/
 │   ├── cheat-migrate/SKILL.md         # ✅ schema 升级（老用户 git pull 后用）
 │   ├── cheat-score-blind/SKILL.md     # ✅ Channel B 隔离打分 sub-agent（仅 Task tool 调用）
 │   ├── aihot/SKILL.md                 # ✅ AI HOT 中文 AI 资讯
-│   └── neat-freak/SKILL.md            # ✅ 收尾整理
 ├── migrations/                        # schema 演进单一来源
 │   ├── registry.md                    # ✅ LATEST_SCHEMA + 版本链表
 │   └── <from>-to-<to>.md              # ✅ 每步迁移的 WHAT/WHY/HOW/Manual fallback

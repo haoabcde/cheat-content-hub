@@ -7,7 +7,7 @@
 
 ## 一句话流程
 
-> **格式分叉**：以下主流程链按 video 格式描述（含 cheat-shoot → videos/ → buffer 环节）。article / xhs 无 shoot 环节、无 buffer，流程为 选题 → 写稿（cheat-seed 或自己写）→ 预测 → 排版（neat-freak）→ 发布 → 复盘——两个图文格式各有一个专用小节，见下文。
+> **格式分叉**：以下主流程链按 video 格式描述（含 cheat-shoot → videos/ → buffer 环节）。article / xhs 无 shoot 环节、无 buffer，流程为 选题 → 写稿（cheat-seed 或自己写）→ 预测 → 排版（自建排版 skill）→ 发布 → 复盘——两个图文格式各有一个专用小节，见下文。
 
 ```
 找选题
@@ -87,11 +87,11 @@ HTML 版式方案 → 首屏 / H2 / 引用 / 图片节奏
   ↓
 cheat-seed --format=xhs 写稿
   ↓
-cheat-visual 配图
+配图（自建配图 skill）
   ↓
 /cheat-predict --format=xhs <稿子> → 写 immutable 预测到 predictions/
   ↓
-neat-freak 格式化成小红书卡片
+排版 skill 格式化成小红书卡片
   ↓
 发布（手动——小红书禁自动化）→ /cheat-publish + URL 登记
   ↓
@@ -249,7 +249,7 @@ bump 是高风险操作——会做 5 步验证（含跨模型独立审）。详
 ├── articles/                # **公众号产物**（article 格式）
 │   └── YYYY-MM-DD_<id>_<short>/
 │       ├── draft.md         # 长文终稿
-│       ├── visual/          # cheat-visual 产出的配图
+│       ├── visual/          # 自建配图 skill 产出
 │       └── report.md        # T+3d 复盘数据（cheat-retro 写）
 │
 └── xhs/                     # **小红书产物**（xhs 格式）
@@ -266,7 +266,7 @@ bump 是高风险操作——会做 5 步验证（含跨模型独立审）。详
 | `scripts/` | 拍前草稿 | Claude AI 草稿或用户原创 | cheat-seed 写初版；用户改写也在原文件 |
 | `predictions/` | 预测锁定 | 7 组件 immutable 日志 | cheat-predict 写 |
 | `videos/<id>/` | 拍后产物 | 最终拍摄稿 + T+3d 数据 | cheat-shoot 建目录；cheat-retro 写 report.md |
-| `articles/<id>/` | 发布后产物 | 长文终稿 + 配图 + T+3d 数据 | 写稿 skill 建目录；cheat-visual 写 visual/；cheat-retro 写 report.md |
+| `articles/<id>/` | 发布后产物 | 长文终稿 + 配图 + T+3d 数据 | 写稿 skill 建目录；配图 skill 写 visual/；cheat-retro 写 report.md |
 | `xhs/<id>/` | 发布后产物 | 图文终稿 + 配图 + T+3d 数据 | 写稿 skill 建目录；cheat-retro 写 report.md |
 
 三处用同一组 `<date>_<id>_<short>` 命名，`<id>` 是 `scripts/<id>.md` 首次落盘内容的 sha256 前 12 位，**草稿改写不变**。

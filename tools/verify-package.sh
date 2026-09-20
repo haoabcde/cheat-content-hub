@@ -49,10 +49,10 @@ done < <(
   ' "$ROOT/install.sh"
 )
 
-if [[ "${#skills[@]}" -eq 18 ]]; then
-  pass "install.sh declares 18 sub-skills"
+if [[ "${#skills[@]}" -eq 16 ]]; then
+  pass "install.sh declares 16 sub-skills"
 else
-  fail "install.sh declares ${#skills[@]} sub-skills, expected 18"
+  fail "install.sh declares ${#skills[@]} sub-skills, expected 16"
 fi
 
 for skill in "${skills[@]}"; do
@@ -223,8 +223,8 @@ fi
 
 echo
 echo "== install help =="
-if bash "$ROOT/install.sh" --help | grep -q "18 sub-skills"; then
-  pass "install.sh --help reports 18 sub-skills"
+if bash "$ROOT/install.sh" --help | grep -q "16 sub-skills"; then
+  pass "install.sh --help reports 16 sub-skills"
 else
   fail "install.sh --help does not report 18 sub-skills"
 fi

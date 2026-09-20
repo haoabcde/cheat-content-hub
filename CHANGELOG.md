@@ -8,13 +8,20 @@ All notable changes to cheat-on-content will be documented here.
 
 ## [Unreleased]
 
+### Removed — 配图 / 排版 skill 改为引导自建（2026-09-20）
+
+- 移除 `skills/cheat-visual` 与 `skills/neat-freak` 的实际实现——配图和排版是表达层（风格即品牌），通用默认值的结局是所有人的号长一个样
+- 新增 [custom-format-skills.md](shared-references/custom-format-skills.md)：教用户给自己建这两个 skill 的方法（该拥有什么 / 怎么注册 / 为什么留白）
+- SKILL.md 路由、cheat-init Phase 5、workflow.template 相应改为指向指南；install.sh / uninstall.sh / verify-package 计数 18 → 16
+- content-guard Rule 3 拦截提示改指 `adapters/trend-sources/aihot.md`（aihot 为外部 skill，需单独安装）
+
 ### Added — cheat-init onboarding 多格式补全（2026-09-19）
 
 新功能进入首次设置流程，修掉新人首稿必踩的坑：
 - Q2.1 平台菜单加"公众号"（无官方 API，手动粘贴阅读/在看/点赞）；Q3 数据回收按格式换指标口径（article=阅读/在看/点赞，xhs=赞藏，引用 state-management 映射表）
 - 新增 Q4.5 热点来源（article/xhs 用户）：涉及 AI/科技资讯 → 启用 aihot 并写 `enabled_trend_sources`，与 content-guard Rule 3 的强制拦截对齐——此前新人写第一篇 AI 稿必被拦且不知原因
 - Phase 3 脚手架按格式复制草稿模板（draft.template / xhs-post.template）到 `<user-repo>/templates/`——此前 content-guard 拦截提示指向的文件在用户项目里不存在
-- Q5 文案补 content-guard 描述；Phase 5 下一步清单按格式分叉（articles//xhs/ 路径），补 neat-freak / cheat-visual / aihot 发现项
+- Q5 文案补 content-guard 描述；Phase 5 下一步清单按格式分叉（articles//xhs/ 路径），补排版 / 配图 / aihot 发现项
 - 修陈旧引用：Phase 2.5 选项字母（Q2=c→b）、"对标视频"→"对标作品"、Phase 1 "后面 Q5"→"Phase 2.5"
 
 ## [0.2.0] — 2026-09-19
